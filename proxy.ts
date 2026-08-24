@@ -1,31 +1,29 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { supabaseEnv } from '@/lib/supabase/env'
 
 // Renova a sessão do Supabase a cada pedido e protege as rotas do app.
 // (No Next.js 16 o middleware chama-se proxy.)
 export async function proxy(request: NextRequest) {
+  const { url, key } = supabaseEnv()
   let response = NextResponse.next({ request })
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          for (const { name, value } of cookiesToSet) {
-            request.cookies.set(name, value)
-          }
-          response = NextResponse.next({ request })
-          for (const { name, value, options } of cookiesToSet) {
-            response.cookies.set(name, value, options)
-          }
-        },
+  const supabase = createServerClient(url, key, {
+    cookies: {
+      getAll() {
+        return request.cookies.getAll()
+      },
+      setAll(cookiesToSet) {
+        for (const { name, value } of cookiesToSet) {
+          request.cookies.set(name, value)
+        }
+        response = NextResponse.next({ request })
+        for (const { name, value, options } of cookiesToSet) {
+          response.cookies.set(name, value, options)
+        }
       },
     },
-  )
+  })
 
   const {
     data: { user },
