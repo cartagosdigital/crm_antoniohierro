@@ -36,6 +36,9 @@ export default async function PipelinePage() {
         title="Pipeline"
         actions={
           <>
+            <Link href="/templates" className={btnGhostClaro}>
+              Templates
+            </Link>
             <form action={signOut}>
               <button type="submit" className={btnGhostClaro}>
                 Sair

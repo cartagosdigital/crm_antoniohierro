@@ -3,6 +3,8 @@
 
 export type UserRole = 'admin' | 'member'
 
+export type MessageChannel = 'email' | 'whatsapp'
+
 export type ProjectStage =
   | 'new_lead'
   | 'contacted'
@@ -123,12 +125,83 @@ export type Database = {
           },
         ]
       }
+      message_templates: {
+        Row: {
+          id: string
+          name: string
+          channel: MessageChannel
+          category: string
+          subject: string | null
+          body: string
+          stage: ProjectStage | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          channel: MessageChannel
+          category?: string
+          subject?: string | null
+          body: string
+          stage?: ProjectStage | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          channel?: MessageChannel
+          category?: string
+          subject?: string | null
+          body?: string
+          stage?: ProjectStage | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      stage_events: {
+        Row: {
+          id: string
+          project_id: string
+          from_stage: ProjectStage | null
+          to_stage: ProjectStage
+          changed_by: string | null
+          changed_at: string
+        }
+        Insert: {
+          id?: string
+          project_id: string
+          from_stage?: ProjectStage | null
+          to_stage: ProjectStage
+          changed_by?: string | null
+          changed_at?: string
+        }
+        Update: {
+          id?: string
+          project_id?: string
+          from_stage?: ProjectStage | null
+          to_stage?: ProjectStage
+          changed_by?: string | null
+          changed_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'stage_events_project_id_fkey'
+            columns: ['project_id']
+            referencedRelation: 'projects'
+            referencedColumns: ['id']
+          },
+        ]
+      }
     }
     Views: Record<never, never>
     Functions: Record<never, never>
     Enums: {
       user_role: UserRole
       project_stage: ProjectStage
+      message_channel: MessageChannel
     }
     CompositeTypes: Record<never, never>
   }
@@ -136,3 +209,5 @@ export type Database = {
 
 export type Contact = Database['public']['Tables']['contacts']['Row']
 export type Project = Database['public']['Tables']['projects']['Row']
+export type MessageTemplate = Database['public']['Tables']['message_templates']['Row']
+export type StageEvent = Database['public']['Tables']['stage_events']['Row']

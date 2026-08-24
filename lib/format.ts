@@ -39,6 +39,14 @@ export function leadTitle(
   return title ?? `${eventType ?? 'Evento'} · ${contactName}`
 }
 
+// Há quanto tempo o lead está parado na etapa atual.
+export function tempoDesde(iso: string) {
+  const dias = Math.floor((Date.now() - new Date(iso).getTime()) / 86_400_000)
+  if (dias <= 0) return 'hoje'
+  if (dias === 1) return 'há 1 dia'
+  return `há ${dias} dias`
+}
+
 export function todayISO() {
   return new Date().toISOString().slice(0, 10)
 }

@@ -1,3 +1,5 @@
+import type { MessageChannel } from '@/types/database'
+
 // Vocabulário visual partilhado: botões, cartão e chips.
 
 // Ação principal — brass sólido, texto escuro. Só sobre superfícies claras ou verde.
@@ -32,6 +34,22 @@ export function Chip({ label }: { label: string }) {
       className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${tom}`}
     >
       {label}
+    </span>
+  )
+}
+
+// Email cinza-azulado, WhatsApp verde claro.
+const CANAL_TOM: Record<MessageChannel, string> = {
+  email: 'bg-slate-500/12 text-slate-600',
+  whatsapp: 'bg-musgo/12 text-musgo',
+}
+
+export function SeloCanal({ channel }: { channel: MessageChannel }) {
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide ${CANAL_TOM[channel]}`}
+    >
+      {channel === 'email' ? 'Email' : 'WhatsApp'}
     </span>
   )
 }
