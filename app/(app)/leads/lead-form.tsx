@@ -33,7 +33,7 @@ export function LeadForm({
       )}
 
       <Seccao titulo="Contacto">
-        <Campo label="Nome" name="name" defaultValue={c?.name} required className="sm:col-span-2" />
+        <Campo label="Nome" name="name" defaultValue={c?.name ?? ''} required className="sm:col-span-2" />
         <Campo label="Email" name="email" type="email" defaultValue={c?.email ?? ''} />
         <Campo label="Telefone" name="phone" defaultValue={c?.phone ?? ''} />
         <Campo

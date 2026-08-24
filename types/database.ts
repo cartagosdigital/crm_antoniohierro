@@ -38,34 +38,37 @@ export type Database = {
       contacts: {
         Row: {
           id: string
-          name: string
+          name: string | null
           email: string | null
           phone: string | null
           source: string | null
           type: string | null
           notes: string | null
+          session_id: string | null
           created_at: string
           updated_at: string
         }
         Insert: {
           id?: string
-          name: string
+          name?: string | null
           email?: string | null
           phone?: string | null
           source?: string | null
           type?: string | null
           notes?: string | null
+          session_id?: string | null
           created_at?: string
           updated_at?: string
         }
         Update: {
           id?: string
-          name?: string
+          name?: string | null
           email?: string | null
           phone?: string | null
           source?: string | null
           type?: string | null
           notes?: string | null
+          session_id?: string | null
           created_at?: string
           updated_at?: string
         }
