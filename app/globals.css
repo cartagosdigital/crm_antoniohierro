@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-floresta: #314528;
+  --color-floresta-esc: #26351f;
+  --color-musgo: #4b6139;
+  --color-creme: #f5f0e1;
+  --color-papel: #faf6ea;
+  --color-branco: #ffffff;
+  --color-pedra: #ded8c4;
+  --color-pedra-esc: #c9c2aa;
+  --color-latao: #a6884e;
+  --color-latao-cl: #c4a874;
+  --color-tinta: #232a1d;
+  --color-tinta-suave: #5c6152;
+  --color-clay: #a5493a;
+
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+
+  --shadow-cartao: 0 1px 2px rgb(35 42 29 / 0.06), 0 1px 8px rgb(35 42 29 / 0.04);
+}
+
+body {
+  background-color: var(--color-creme);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+}
+
+/* Valores e contagens alinham em coluna. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
