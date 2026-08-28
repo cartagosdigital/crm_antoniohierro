@@ -45,7 +45,7 @@ function parseLead(formData: FormData): LeadInput | string {
   }
 
   const rawStage = formData.get('stage')
-  const stage: ProjectStage = isStage(rawStage) ? rawStage : 'new_lead'
+  const stage: ProjectStage = isStage(rawStage) ? rawStage : 'diagnostico'
 
   return {
     name,

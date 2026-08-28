@@ -33,7 +33,7 @@ types/database.ts   tipos do schema public
 As migrations em `supabase/migrations/` já estão aplicadas no projeto Supabase; estão no repo só para o schema ficar versionado.
 
 - `contacts` — a pessoa
-- `projects` — o evento / a oportunidade, com `stage` (`new_lead` → `contacted` → `proposal_sent` → `negotiation` → `won` | `lost`) e `proposal_total` (o valor "em jogo", somado por coluna no pipeline)
+- `projects` — o evento / a oportunidade, com `stage` (`diagnostico` → `qualificacao` → `reuniao_marcada` → `negociacao` → `quase_fechar` → `ganho` | `perdido`) e `proposal_total` (o valor "em jogo", somado por coluna no pipeline)
 - `profiles` — espelho de `auth.users` com `role`
 
 Um "lead" no UI é um `contact` mais um `project`, criados e editados em conjunto.

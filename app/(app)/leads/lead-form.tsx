@@ -98,7 +98,7 @@ export function LeadForm({
           <label htmlFor="stage" className={rotulo}>
             Etapa
           </label>
-          <select id="stage" name="stage" defaultValue={p?.stage ?? 'new_lead'} className={campo}>
+          <select id="stage" name="stage" defaultValue={p?.stage ?? 'diagnostico'} className={campo}>
             {STAGES.map((s) => (
               <option key={s.value} value={s.value}>
                 {s.label}

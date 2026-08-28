@@ -2,12 +2,13 @@ import type { ProjectStage } from '@/types/database'
 
 // Ordem do enum project_stage.
 export const STAGES: { value: ProjectStage; label: string }[] = [
-  { value: 'new_lead', label: 'Novo lead' },
-  { value: 'contacted', label: 'Contactado' },
-  { value: 'proposal_sent', label: 'Proposta enviada' },
-  { value: 'negotiation', label: 'Negociação' },
-  { value: 'won', label: 'Ganho' },
-  { value: 'lost', label: 'Perdido' },
+  { value: 'diagnostico', label: 'Diagnóstico' },
+  { value: 'qualificacao', label: 'Qualificação' },
+  { value: 'reuniao_marcada', label: 'Reunião Marcada' },
+  { value: 'negociacao', label: 'Negociação' },
+  { value: 'quase_fechar', label: 'Quase a Fechar' },
+  { value: 'ganho', label: 'Ganho' },
+  { value: 'perdido', label: 'Perdido' },
 ]
 
 export const STAGE_VALUES = STAGES.map((s) => s.value)

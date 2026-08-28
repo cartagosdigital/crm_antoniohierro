@@ -42,7 +42,7 @@ export function Board({ cards, today }: { cards: BoardCard[]; today: string }) {
   }
 
   return (
-    <div className="flex gap-4 overflow-x-auto pb-4">
+    <div className="flex items-start gap-4 overflow-x-auto pb-4">
       {STAGES.map((stage) => {
         const columnCards = optimisticCards.filter((c) => c.stage === stage.value)
         const total = columnCards.reduce((sum, c) => sum + (c.proposalTotal ?? 0), 0)
@@ -56,11 +56,11 @@ export function Board({ cards, today }: { cards: BoardCard[]; today: string }) {
             }}
             onDragLeave={() => setDragOver((s) => (s === stage.value ? null : s))}
             onDrop={(e) => drop(stage.value, e)}
-            className={`flex w-72 shrink-0 flex-col rounded-lg border bg-papel transition ${
+            className={`flex max-h-[calc(100vh-9rem)] w-72 shrink-0 flex-col rounded-lg border bg-papel transition ${
               dragOver === stage.value ? 'border-musgo bg-musgo/5' : 'border-pedra'
             }`}
           >
-            <header className="flex items-baseline gap-2 border-b border-pedra px-4 py-3">
+            <header className="flex shrink-0 items-baseline gap-2 border-b border-pedra px-4 py-3">
               <h2 className="font-display text-sm font-semibold text-floresta">{stage.label}</h2>
               <span className="tabular rounded-full bg-pedra/60 px-1.5 text-[11px] text-tinta-suave">
                 {columnCards.length}
@@ -70,7 +70,7 @@ export function Board({ cards, today }: { cards: BoardCard[]; today: string }) {
               </span>
             </header>
 
-            <div className="flex flex-1 flex-col gap-2 p-3">
+            <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto p-3">
               {columnCards.map((card) => (
                 <Card key={card.id} card={card} today={today} />
               ))}
@@ -89,7 +89,8 @@ export function Board({ cards, today }: { cards: BoardCard[]; today: string }) {
 }
 
 function Card({ card, today }: { card: BoardCard; today: string }) {
-  const vencido = isPast(card.eventDate, today) && card.stage !== 'won' && card.stage !== 'lost'
+  const vencido =
+    isPast(card.eventDate, today) && card.stage !== 'ganho' && card.stage !== 'perdido'
 
   return (
     <article

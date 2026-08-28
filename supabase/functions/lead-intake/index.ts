@@ -86,7 +86,7 @@ Deno.serve(async (req) => {
     await supabase.from("projects").insert({
       contact_id: contact.id,
       event_type: eventType,
-      stage: "new_lead",
+      stage: "diagnostico",
     });
   }
 
