@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--
+  Desenho aprovado da proposta (rascunho do António), guardado como referência.
+  O preview e o PDF do construtor em app/(app)/proposals/[id]/ espelham este ficheiro.
+
+  Uma diferença face ao original: o logo vinha embutido como data URI base64 e
+  aqui está como <img src="logo-hierro.png">, o mesmo ficheiro que o construtor
+  serve de public/logo-hierro.png.
+-->
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>António Hierro · Proposta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --floresta:#314528;--creme:#f5f0e1;--papel:#faf7ef;--branco:#fff;
+    --pedra:#e2ddce;--pedra-esc:#c9c2aa;--latao:#a6884e;--latao-cl:#c9ad78;
+    --tinta:#2a3222;--tinta-suave:#6b6f60;
+    --display:'Fraunces',Georgia,serif;--corpo:'Instrument Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--corpo);color:var(--tinta);background:#e7e2d3;line-height:1.65;-webkit-font-smoothing:antialiased;padding:34px 16px}
+
+  .switch{position:fixed;top:16px;right:16px;z-index:50;display:flex;background:var(--branco);border:1px solid var(--pedra-esc);border-radius:30px;padding:3px;box-shadow:0 6px 18px -8px rgba(0,0,0,.3)}
+  .switch button{border:none;background:transparent;font-family:var(--corpo);font-size:12px;font-weight:600;letter-spacing:.08em;padding:7px 15px;border-radius:24px;cursor:pointer;color:var(--tinta-suave)}
+  .switch button.on{background:var(--floresta);color:var(--creme)}
+
+  .page{width:100%;max-width:800px;margin:0 auto 26px;background:var(--branco);box-shadow:0 16px 44px -22px rgba(38,53,31,.5);overflow:hidden}
+
+  /* capa */
+  .cover{background:var(--floresta);color:var(--creme);padding:96px 60px 84px;text-align:center}
+  .cover img{width:208px;height:auto;display:block;margin:0 auto}
+  .cover .rule{width:44px;height:1px;background:var(--latao-cl);margin:40px auto 28px;opacity:.8}
+  .cover .kicker{font-size:10.5px;letter-spacing:.44em;text-transform:uppercase;color:var(--latao-cl);font-weight:600}
+  .cover .couple{font-family:var(--display);font-weight:400;font-size:31px;margin-top:20px;color:var(--creme)}
+  .cover .event{font-size:12px;letter-spacing:.05em;color:var(--creme);opacity:.82;margin-top:12px}
+
+  /* conteúdo */
+  .body{padding:58px 62px 52px}
+  .intro{text-align:center;max-width:480px;margin:0 auto}
+  .intro .eyebrow{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--latao);font-weight:600}
+  .intro h2{font-family:var(--display);font-weight:400;font-size:23px;color:var(--floresta);margin:12px 0 12px}
+  .intro p{font-size:14px;color:var(--tinta-suave);font-family:var(--display);font-style:italic;line-height:1.7}
+
+  .sep{display:flex;align-items:center;gap:16px;margin:44px 0 32px}
+  .sep::before,.sep::after{content:"";flex:1;height:1px;background:var(--pedra)}
+  .sep span{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--latao);font-weight:600}
+
+  .pack{margin-bottom:34px}
+  .pack-head{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--pedra)}
+  .pk-name{font-family:var(--display);font-weight:500;font-size:20px;color:var(--floresta)}
+  .pk-tag{font-size:12.5px;color:var(--tinta-suave);font-style:italic;font-family:var(--display);margin-top:3px}
+  .pk-price{text-align:right;white-space:nowrap}
+  .pk-price .v{font-family:var(--display);font-weight:500;font-size:22px;color:var(--latao)}
+  .pk-price .n{font-size:10.5px;color:var(--tinta-suave);letter-spacing:.04em;margin-top:1px}
+  .pack-body{padding-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:22px 34px}
+  .grp h4{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--latao);font-weight:600;margin-bottom:9px}
+  .grp ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .grp li{font-size:13px;padding-left:16px;position:relative;color:var(--tinta);line-height:1.5}
+  .grp li::before{content:"";position:absolute;left:1px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--latao-cl)}
+
+  .steps{background:var(--floresta);color:var(--creme);padding:28px 34px;margin-top:42px;text-align:center}
+  .steps h3{font-family:var(--display);font-weight:400;font-size:19px;color:var(--creme);margin-bottom:7px}
+  .steps p{font-size:13px;color:var(--creme);opacity:.9;max-width:440px;margin:0 auto}
+
+  .foot{margin-top:40px;padding-top:22px;border-top:1px solid var(--pedra);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+  .foot .fw{font-family:var(--display);letter-spacing:.2em;font-size:12.5px;color:var(--floresta);font-weight:500}
+  .foot .fmeta{font-size:11px;color:var(--tinta-suave);text-align:right;line-height:1.6}
+
+  .note{max-width:800px;margin:2px auto 0;font-size:11.5px;color:#837c69;text-align:center;font-style:italic}
+
+  @media (max-width:620px){.pack-body{grid-template-columns:1fr}}
+  @media print{body{background:#fff;padding:0}.page{box-shadow:none;margin:0;max-width:100%}.switch,.note{display:none}}
+</style>
+</head>
+<body>
+  <div class="switch">
+    <button id="b-pt" class="on" onclick="setLang('pt')">PT</button>
+    <button id="b-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <!-- CAPA -->
+  <div class="page">
+    <div class="cover">
+      <img src="logo-hierro.png" alt="António Hierro Event Planner">
+      <div class="rule"></div>
+      <div class="kicker" data-pt="Proposta de serviços" data-en="Proposal of services">Proposta de serviços</div>
+      <div class="couple">Marta &amp; João</div>
+      <div class="event" data-pt="Casamento · 17 de outubro de 2026 · Quinta do Vallado" data-en="Wedding · 17 October 2026 · Quinta do Vallado">Casamento · 17 de outubro de 2026 · Quinta do Vallado</div>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO -->
+  <div class="page">
+    <div class="body">
+      <div class="intro">
+        <div class="eyebrow" data-pt="A nossa abordagem" data-en="Our approach">A nossa abordagem</div>
+        <h2 data-pt="Cada casamento é único" data-en="Every wedding is unique">Cada casamento é único</h2>
+        <p data-pt="Acompanhamo-vos em cada etapa, do primeiro conceito ao último brinde, para que vivam o vosso dia sem uma única preocupação." data-en="We guide you through every step, from the first idea to the final toast, so you can live your day without a single worry.">Acompanhamo-vos em cada etapa, do primeiro conceito ao último brinde, para que vivam o vosso dia sem uma única preocupação.</p>
+      </div>
+
+      <div class="sep"><span data-pt="Os pacotes" data-en="The packages">Os pacotes</span></div>
+
+      <!-- GOLD -->
+      <div class="pack">
+        <div class="pack-head">
+          <div>
+            <div class="pk-name" data-pt="Gold · Planeamento Completo" data-en="Gold · Full Planning">Gold · Planeamento Completo</div>
+            <div class="pk-tag" data-pt="Acompanhamento integral, do início ao fim." data-en="Full support, from start to finish.">Acompanhamento integral, do início ao fim.</div>
+          </div>
+          <div class="pk-price"><div class="v">€ 0.000</div><div class="n" data-pt="+ IVA · valor de exemplo" data-en="+ VAT · sample value">+ IVA · valor de exemplo</div></div>
+        </div>
+        <div class="pack-body">
+          <div class="grp">
+            <h4 data-pt="Coordenação completa" data-en="Full coordination">Coordenação completa</h4>
+            <ul>
+              <li data-pt="Acompanhamento contínuo nos 12 meses anteriores ao evento" data-en="Ongoing support in the 12 months before the event">Acompanhamento contínuo nos 12 meses anteriores ao evento</li>
+              <li data-pt="Reuniões quinzenais de alinhamento, presenciais ou por videochamada" data-en="Fortnightly alignment meetings, in person or by video call">Reuniões quinzenais de alinhamento, presenciais ou por videochamada</li>
+              <li data-pt="Recomendação e gestão de fornecedores, orçamentos e contratos" data-en="Vendor recommendation and management, quotes and contracts">Recomendação e gestão de fornecedores, orçamentos e contratos</li>
+              <li data-pt="Pasta colaborativa no Google Drive e grupo direto de WhatsApp" data-en="Shared Google Drive folder and direct WhatsApp group">Pasta colaborativa no Google Drive e grupo direto de WhatsApp</li>
+            </ul>
+          </div>
+          <div class="grp">
+            <h4 data-pt="Pré-produção" data-en="Pre-production">Pré-produção</h4>
+            <ul>
+              <li data-pt="Visitas técnicas e apoio na análise de propostas" data-en="Technical visits and support in reviewing proposals">Visitas técnicas e apoio na análise de propostas</li>
+              <li data-pt="Coordenação de todos os profissionais contratados" data-en="Coordination of all contracted professionals">Coordenação de todos os profissionais contratados</li>
+              <li data-pt="Checklist detalhado e timeline do evento" data-en="Detailed checklist and event timeline">Checklist detalhado e timeline do evento</li>
+            </ul>
+          </div>
+          <div class="grp">
+            <h4 data-pt="No dia do evento" data-en="On the event day">No dia do evento</h4>
+            <ul>
+              <li data-pt="Coordenação integral de toda a logística" data-en="Full coordination of all logistics">Coordenação integral de toda a logística</li>
+              <li data-pt="Supervisão de chegadas e montagem dos fornecedores" data-en="Supervision of arrivals and vendor setup">Supervisão de chegadas e montagem dos fornecedores</li>
+              <li data-pt="Equipa presente desde a montagem até ao fim, até 12h" data-en="Team present from setup to closing, up to 12h">Equipa presente desde a montagem até ao fim, até 12h</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SILVER -->
+      <div class="pack">
+        <div class="pack-head">
+          <div>
+            <div class="pk-name" data-pt="Silver · Toques Finais" data-en="Silver · Finishing Touches">Silver · Toques Finais</div>
+            <div class="pk-tag" data-pt="Apoio especializado na reta final." data-en="Specialist support in the final stretch.">Apoio especializado na reta final.</div>
+          </div>
+          <div class="pk-price"><div class="v">€ 0.000</div><div class="n" data-pt="+ IVA · valor de exemplo" data-en="+ VAT · sample value">+ IVA · valor de exemplo</div></div>
+        </div>
+        <div class="pack-body">
+          <div class="grp">
+            <h4 data-pt="Apoio final de planeamento" data-en="Final planning support">Apoio final de planeamento</h4>
+            <ul>
+              <li data-pt="Acompanhamento nos 3 meses anteriores ao evento" data-en="Support in the 3 months before the event">Acompanhamento nos 3 meses anteriores ao evento</li>
+              <li data-pt="Revisão e otimização dos contratos com fornecedores" data-en="Review and optimisation of vendor contracts">Revisão e otimização dos contratos com fornecedores</li>
+              <li data-pt="Elaboração do cronograma final" data-en="Preparation of the final schedule">Elaboração do cronograma final</li>
+            </ul>
+          </div>
+          <div class="grp">
+            <h4 data-pt="Pré-produção" data-en="Pre-production">Pré-produção</h4>
+            <ul>
+              <li data-pt="Coordenação de todos os profissionais contratados" data-en="Coordination of all contracted professionals">Coordenação de todos os profissionais contratados</li>
+              <li data-pt="Checklist detalhado e timeline do evento" data-en="Detailed checklist and event timeline">Checklist detalhado e timeline do evento</li>
+            </ul>
+          </div>
+          <div class="grp">
+            <h4 data-pt="No dia do evento" data-en="On the event day">No dia do evento</h4>
+            <ul>
+              <li data-pt="Coordenação integral de toda a logística" data-en="Full coordination of all logistics">Coordenação integral de toda a logística</li>
+              <li data-pt="Supervisão de chegadas e montagem dos fornecedores" data-en="Supervision of arrivals and vendor setup">Supervisão de chegadas e montagem dos fornecedores</li>
+              <li data-pt="Equipa presente desde a montagem até ao fim, até 12h" data-en="Team present from setup to closing, up to 12h">Equipa presente desde a montagem até ao fim, até 12h</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="steps">
+        <h3 data-pt="Próximos passos" data-en="Next steps">Próximos passos</h3>
+        <p data-pt="Escolhido o pacote, formalizamos com o contrato e damos início ao planeamento do vosso dia." data-en="Once the package is chosen, we formalise it with the contract and begin planning your day.">Escolhido o pacote, formalizamos com o contrato e damos início ao planeamento do vosso dia.</p>
+      </div>
+
+      <div class="foot">
+        <div class="fw">ANTÓNIO HIERRO</div>
+        <div class="fmeta">
+          <span data-pt="Proposta válida por 15 dias · valores acrescidos de IVA" data-en="Proposal valid for 15 days · values plus VAT">Proposta válida por 15 dias · valores acrescidos de IVA</span><br>
+          events@antoniohierro.com · Porto
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note" data-pt="Rascunho · conteúdo, itens e valores são de exemplo e ficam totalmente editáveis no construtor de propostas." data-en="Draft · content, items and values are samples and fully editable in the proposal builder.">Rascunho · conteúdo, itens e valores são de exemplo e ficam totalmente editáveis no construtor de propostas.</div>
+
+<script>
+  function setLang(l){
+    document.documentElement.lang = (l==='pt')?'pt-PT':'en';
+    document.getElementById('b-pt').classList.toggle('on', l==='pt');
+    document.getElementById('b-en').classList.toggle('on', l==='en');
+    document.querySelectorAll('[data-pt]').forEach(function(el){
+      el.textContent = el.getAttribute('data-'+l);
+    });
+  }
+</script>
+</body>
+</html>

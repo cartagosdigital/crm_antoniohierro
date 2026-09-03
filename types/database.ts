@@ -1,6 +1,10 @@
 // Gerado a partir do schema do Supabase (projeto uvrychomsrpkwnsapswb).
 // Regenerar com: npx supabase gen types typescript --project-id <ref> > types/database.ts
 // Os aliases no fim do ficheiro são acrescentados à mão — mantê-los ao regenerar.
+//
+// PROVISÓRIO: proposals e proposal_language foram escritos à mão a partir de
+// supabase/migrations/0009_proposals.sql, sem passar pelo gerador (o conector
+// Supabase estava em baixo). Regenerar e confirmar contra o schema real.
 
 export type Json =
   | string
@@ -164,6 +168,41 @@ export type Database = {
           },
         ]
       }
+      proposals: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          language: Database["public"]["Enums"]["proposal_language"]
+          project_id: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          id?: string
+          language?: Database["public"]["Enums"]["proposal_language"]
+          project_id: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          language?: Database["public"]["Enums"]["proposal_language"]
+          project_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proposals_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       stage_events: {
         Row: {
           changed_at: string
@@ -216,6 +255,7 @@ export type Database = {
         | "quase_fechar"
         | "ganho"
         | "perdido"
+      proposal_language: "pt" | "en"
       user_role: "admin" | "member"
     }
     CompositeTypes: {
@@ -354,6 +394,7 @@ export const Constants = {
         "ganho",
         "perdido",
       ],
+      proposal_language: ["pt", "en"],
       user_role: ["admin", "member"],
     },
   },
@@ -368,4 +409,5 @@ export type ProjectStage = Enums<'project_stage'>
 export type Contact = Tables<'contacts'>
 export type Project = Tables<'projects'>
 export type MessageTemplate = Tables<'message_templates'>
+export type Proposal = Tables<'proposals'>
 export type StageEvent = Tables<'stage_events'>

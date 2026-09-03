@@ -1,0 +1,293 @@
+/* Porto do CSS de reference/proposta.html, com escopo em .documento para não
+   vazar para o resto do app. Os valores são os do rascunho e não os tokens do
+   CRM: as duas paletas quase coincidem, mas o que sai ao cliente tem de bater
+   certo com o desenho aprovado, não com a interface.
+
+   Duas diferenças face ao rascunho, ambas para o documento ser paginável:
+   - .page tem medidas A4 fixas (o rascunho é fluido até 800px, o que no papel
+     ficaria a escalar). 210mm ≈ 794px, portanto os paddings do rascunho caem
+     praticamente na mesma largura.
+   - .cover tem min-height de uma página, senão a capa imprimia como uma faixa
+     verde no topo de uma folha branca. */
+
+.documento {
+  --floresta: #314528;
+  --creme: #f5f0e1;
+  --branco: #fff;
+  --pedra: #e2ddce;
+  --pedra-esc: #c9c2aa;
+  --latao: #a6884e;
+  --latao-cl: #c9ad78;
+  --tinta: #2a3222;
+  --tinta-suave: #6b6f60;
+  --display: var(--font-fraunces), Georgia, serif;
+  --corpo: var(--font-instrument-sans), system-ui, sans-serif;
+
+  font-family: var(--corpo);
+  color: var(--tinta);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.documento * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.documento .page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto 26px;
+  background: var(--branco);
+  box-shadow: 0 16px 44px -22px rgba(38, 53, 31, 0.5);
+  overflow: hidden;
+}
+
+/* capa */
+.documento .cover {
+  min-height: 297mm;
+  background: var(--floresta);
+  color: var(--creme);
+  padding: 96px 60px 84px;
+  text-align: center;
+  /* sem isto o browser descarta o fundo verde ao imprimir */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.documento .cover img {
+  width: 208px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.documento .cover .rule {
+  width: 44px;
+  height: 1px;
+  background: var(--latao-cl);
+  margin: 40px auto 28px;
+  opacity: 0.8;
+}
+.documento .cover .kicker {
+  font-size: 10.5px;
+  letter-spacing: 0.44em;
+  text-transform: uppercase;
+  color: var(--latao-cl);
+  font-weight: 600;
+}
+.documento .cover .couple {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 31px;
+  margin-top: 20px;
+  color: var(--creme);
+}
+.documento .cover .event {
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--creme);
+  opacity: 0.82;
+  margin-top: 12px;
+}
+
+/* conteúdo */
+.documento .body {
+  padding: 58px 62px 52px;
+}
+.documento .intro {
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.documento .intro .eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--latao);
+  font-weight: 600;
+}
+.documento .intro h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 23px;
+  color: var(--floresta);
+  margin: 12px 0 12px;
+}
+.documento .intro p {
+  font-size: 14px;
+  color: var(--tinta-suave);
+  font-family: var(--display);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.documento .sep {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 44px 0 32px;
+}
+.documento .sep::before,
+.documento .sep::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--pedra);
+}
+.documento .sep span {
+  font-size: 10.5px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--latao);
+  font-weight: 600;
+}
+
+.documento .pack {
+  margin-bottom: 34px;
+  break-inside: avoid;
+}
+.documento .pack-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--pedra);
+}
+.documento .pk-name {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--floresta);
+}
+.documento .pk-tag {
+  font-size: 12.5px;
+  color: var(--tinta-suave);
+  font-style: italic;
+  font-family: var(--display);
+  margin-top: 3px;
+}
+.documento .pk-price {
+  text-align: right;
+  white-space: nowrap;
+}
+.documento .pk-price .v {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--latao);
+}
+.documento .pk-price .n {
+  font-size: 10.5px;
+  color: var(--tinta-suave);
+  letter-spacing: 0.04em;
+  margin-top: 1px;
+}
+.documento .pack-body {
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 34px;
+}
+.documento .grp h4 {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--latao);
+  font-weight: 600;
+  margin-bottom: 9px;
+}
+.documento .grp ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.documento .grp li {
+  font-size: 13px;
+  padding-left: 16px;
+  position: relative;
+  color: var(--tinta);
+  line-height: 1.5;
+}
+.documento .grp li::before {
+  content: '';
+  position: absolute;
+  left: 1px;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--latao-cl);
+}
+
+.documento .steps {
+  background: var(--floresta);
+  color: var(--creme);
+  padding: 28px 34px;
+  margin-top: 42px;
+  text-align: center;
+  break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.documento .steps h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 19px;
+  color: var(--creme);
+  margin-bottom: 7px;
+}
+.documento .steps p {
+  font-size: 13px;
+  color: var(--creme);
+  opacity: 0.9;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.documento .foot {
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid var(--pedra);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.documento .foot .fw {
+  font-family: var(--display);
+  letter-spacing: 0.2em;
+  font-size: 12.5px;
+  color: var(--floresta);
+  font-weight: 500;
+}
+.documento .foot .fmeta {
+  font-size: 11px;
+  color: var(--tinta-suave);
+  text-align: right;
+  line-height: 1.6;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  /* a cromagem do app (botões, avisos) não entra no PDF */
+  .nao-imprimir {
+    display: none !important;
+  }
+
+  .documento .page {
+    box-shadow: none;
+    margin: 0;
+    break-after: page;
+  }
+  .documento .page:last-child {
+    break-after: auto;
+  }
+}

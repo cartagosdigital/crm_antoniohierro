@@ -6,6 +6,7 @@ import { tempoDesde } from '@/lib/format'
 import { dadosMerge } from '@/lib/merge'
 import { stageLabel } from '@/lib/stages'
 import { createClient } from '@/lib/supabase/server'
+import { GerarProposta } from '../../proposals/gerar-proposta'
 import { deleteLead, updateLead } from '../actions'
 import { Composer } from '../composer'
 import { LeadForm } from '../lead-form'
@@ -26,9 +27,9 @@ export default async function EditLeadPage({ params }: { params: Promise<{ id: s
 
   const { contact, ...rest } = project
 
-  // Os templates e o histórico são acessórios: se falharem, a edição do lead
-  // continua a funcionar.
-  const [{ data: templates }, { data: ultimoEvento }] = await Promise.all([
+  // Os templates, o histórico e as propostas são acessórios: se falharem, a
+  // edição do lead continua a funcionar.
+  const [{ data: templates }, { data: ultimoEvento }, { data: propostas }] = await Promise.all([
     supabase
       .from('message_templates')
       .select('*')
@@ -41,6 +42,7 @@ export default async function EditLeadPage({ params }: { params: Promise<{ id: s
       .order('changed_at', { ascending: false })
       .limit(1)
       .maybeSingle(),
+    supabase.from('proposals').select('id, language').eq('project_id', id).order('language'),
   ])
 
   return (
@@ -71,6 +73,8 @@ export default async function EditLeadPage({ params }: { params: Promise<{ id: s
           dados={dadosMerge(rest, contact)}
           destino={{ email: contact.email, phone: contact.phone }}
         />
+
+        <GerarProposta projectId={id} existentes={propostas ?? []} />
 
         <form action={deleteLead} className="flex justify-end">
           <input type="hidden" name="contact_id" value={contact.id} />
